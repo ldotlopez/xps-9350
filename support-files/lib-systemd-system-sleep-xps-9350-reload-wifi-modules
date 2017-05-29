@@ -1,0 +1,13 @@
+#!/bin/sh
+
+PATH=/sbin:/usr/sbin:/bin:/usr/bin
+
+WPACLI=wpa_cli
+
+case "$1" in
+	resume|thaw)
+		/usr/local/bin/xps-9350-reload-wifi-modules
+		;;
+esac
+
+exit 0

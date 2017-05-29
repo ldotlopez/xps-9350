@@ -1,0 +1,6 @@
+#!/bin/bash
+set -e
+
+/sbin/rmmod iwlmvm iwlwifi
+/sbin/modprobe iwlwifi
+
