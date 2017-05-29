@@ -114,3 +114,10 @@ Install file: `var-lib-gdm3-.config-pulse-client.conf`
 [https://wiki.debian.org/BluetoothUser/a2dp](https://wiki.debian.org/BluetoothUser/a2dp)
 
 
+Wifi doesn't work after sleep
+---
+
+Install files:
+
+  * `usr-local-bin-xps-9350-reload-wifi-modules`
+  * `lib-systemd-system-sleep-xps-9350-reload-wifi-modules`
