@@ -1,0 +1,22 @@
+[Unit]
+Description=Resilio Sync
+After=network.target
+
+[Service]
+Nice=19
+IOSchedulingClass=idle
+IOSchedulingPriority=7
+ExecStart=/opt/rslsync/current/rslsync --config /opt/rslsync/current/config.json --nodaemon
+PIDFile=/opt/rslsync/current/run/rslsync.pid
+CPUAccounting=true
+CPUQuota=5%
+StandardOutput=syslog+console
+StandardError=syslog+console
+User=rslsync
+Group=media
+Restart=on-failure
+SuccessExitStatus=3 4
+RestartForceExitStatus=3 4
+
+[Install]
+WantedBy=default.target
