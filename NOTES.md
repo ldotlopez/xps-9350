@@ -99,7 +99,10 @@ Set default editor to vim
 rslsync as user
 ---
 
-  * Install files `etc-systemd-*-rslsync*.service`
+  * Install files:
+    * `etc-systemd-system-rslsync.service`
+    * `etc-systemd-user-rslsync@.service`
+  * `systemctl daemon-reload`
   * `systemctl --user enable "rslsync@$USER"`
 
 
@@ -108,4 +111,6 @@ A2DP Bluetooth profile doesn't work with Gnome
 
 Install file: `var-lib-gdm3-.config-pulse-client.conf`
 
-https://wiki.debian.org/BluetoothUser/a2dp
+[https://wiki.debian.org/BluetoothUser/a2dp](https://wiki.debian.org/BluetoothUser/a2dp)
+
+
