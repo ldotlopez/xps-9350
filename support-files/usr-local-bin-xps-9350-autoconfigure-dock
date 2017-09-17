@@ -1,0 +1,54 @@
+#!/bin/bash
+
+CORE_DISPLAY="eDP-1"
+EXTERNAL_DISPLAY="DP-1"
+EXTERNAL_WIDTH="1920"
+EXTERNAL_HEIGHT="1080"
+EXTERNAL_RATE="60"
+V="echo"
+
+function check_external_keyboard () {
+	lsusb | grep -q 045e:0745
+}
+
+function check_usable_core_display() {
+	grep ^state: /proc/acpi/button/lid/LID0/state  | grep -q open
+}
+
+MODELINE="$(\
+	gtf "$EXTERNAL_WIDTH" "$EXTERNAL_HEIGHT" "$EXTERNAL_RATE" \
+	| grep Modeline \
+	| sed -e 's,  *, ,g' \
+	| cut -d " " -f 3-12 \
+	| sed -e 's,",,g')"
+MODELINE_NAME="$(echo $MODELINE | cut -d ' ' -f 1)"
+
+(
+	$V pacmd set-card-profile 0 output:analog-stereo
+	$V xrandr --output "$EXTERNAL_DISPLAY" --off
+	$V xrandr --delmode "$EXTERNAL_DISPLAY" "$MODELINE_NAME"
+	$V xrandr --rmmode "$MODELINE_NAME"
+) 2>/dev/null
+$V sleep 1
+
+$V xrandr --newmode $MODELINE
+$V xrandr --addmode "$EXTERNAL_DISPLAY" "$MODELINE_NAME"
+$V sleep 1
+$V xrandr --output "$EXTERNAL_DISPLAY" --mode "$MODELINE_NAME"
+
+
+if check_usable_core_display; then
+	$V xrandr --output "$CORE_DISPLAY" --left-of "$EXTERNAL_DISPLAY"
+else
+	$V xrandr --output "$CORE_DISPLAY" --off
+fi
+
+if check_external_keyboard; then
+	$V xrandr --output "$EXTERNAL_DISPLAY" --primary
+else
+	$V xrandr --output "$CORE_DISPLAY" --primary
+fi
+
+$V pacmd set-card-profile 0 output:hdmi-stereo
+
+

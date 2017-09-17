@@ -7,8 +7,10 @@ Desktop
 * dconf-editor gconf-editor
 * d-feet 
 * gnome-tweak-tool
+* mplayer
 * network-manager-openvpn-gnome network-manager-vpnc-gnome 
 * nautilus-dropbox
+* pdfmod
 * shotwell
 * terminator
 * ubuntu-restricted-addons
@@ -24,6 +26,7 @@ Tools
 * iftop
 * iotop
 * moreutils
+* pmount
 * vim
 * virtualenvwrapper
 
@@ -121,3 +124,12 @@ Install files:
 
   * `usr-local-bin-xps-9350-reload-wifi-modules`
   * `lib-systemd-system-sleep-xps-9350-reload-wifi-modules`
+
+
+Configure official DELL dock
+---
+
+Install files:
+
+  * `usr-local-bin-xps-9350-autoconfigure-dock`
+
