@@ -20,11 +20,13 @@ Tools
 ---
 * apt-file
 * curl
+* fdupes
 * git
 * gpm
 * htop
 * iftop
 * iotop
+* jhead
 * moreutils
 * pmount
 * vim
