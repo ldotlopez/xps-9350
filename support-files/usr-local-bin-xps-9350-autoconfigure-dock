@@ -1,11 +1,11 @@
 #!/bin/bash
 
-CORE_DISPLAY="eDP-1"
-EXTERNAL_DISPLAY="DP-1"
+CORE_DISPLAY="eDP1"
+EXTERNAL_DISPLAY="DP1"
 EXTERNAL_WIDTH="1920"
 EXTERNAL_HEIGHT="1080"
 EXTERNAL_RATE="60"
-V="echo"
+V=""
 
 function check_external_keyboard () {
 	lsusb | grep -q 045e:0745
@@ -19,9 +19,10 @@ MODELINE="$(\
 	gtf "$EXTERNAL_WIDTH" "$EXTERNAL_HEIGHT" "$EXTERNAL_RATE" \
 	| grep Modeline \
 	| sed -e 's,  *, ,g' \
+	| tr '_' '-' \
 	| cut -d " " -f 3-12 \
 	| sed -e 's,",,g')"
-MODELINE_NAME="$(echo $MODELINE | cut -d ' ' -f 1)"
+MODELINE_NAME="$(echo $MODELINE | cut -d ' ' -f 1 )"
 
 (
 	$V pacmd set-card-profile 0 output:analog-stereo
