@@ -1,0 +1,10 @@
+[Unit]
+Description=PowerTOP auto tune
+
+[Service]
+Type=idle
+Environment="TERM=dumb"
+ExecStart=/usr/local/bin/powertop.wrapper
+
+[Install]
+WantedBy=multi-user.target
